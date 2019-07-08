@@ -31,7 +31,7 @@ public final class ObservableSetSource {
             SetChangeListener<T> listener = c -> subscriber.onNext(source);
             source.addListener(listener);
             subscriber.setDisposable(JavaFxSubscriptions.unsubscribeInEventDispatchThread(() -> source.removeListener(listener)));
-        }).startWith(source).subscribeOn(JavaFxScheduler.platform());
+        }).startWith(source);
     }
 
     public static <T> Observable<T> fromObservableSetAdds(final ObservableSet<T> source) {
@@ -46,7 +46,7 @@ public final class ObservableSetSource {
             source.addListener(listener);
             subscriber.setDisposable(JavaFxSubscriptions.unsubscribeInEventDispatchThread(() -> source.removeListener(listener)));
 
-        }).subscribeOn(JavaFxScheduler.platform());
+        });
     }
 
     public static <T> Observable<T> fromObservableSetRemovals(final ObservableSet<T> source) {
@@ -61,7 +61,7 @@ public final class ObservableSetSource {
             source.addListener(listener);
             subscriber.setDisposable(JavaFxSubscriptions.unsubscribeInEventDispatchThread(() -> source.removeListener(listener)));
 
-        }).subscribeOn(JavaFxScheduler.platform());
+        });
     }
 
     public static <T> Observable<SetChange<T>> fromObservableSetChanges(final ObservableSet<T> source) {
@@ -79,6 +79,6 @@ public final class ObservableSetSource {
             source.addListener(listener);
             subscriber.setDisposable(JavaFxSubscriptions.unsubscribeInEventDispatchThread(() -> source.removeListener(listener)));
 
-        }).subscribeOn(JavaFxScheduler.platform());
+        });
     }
 }

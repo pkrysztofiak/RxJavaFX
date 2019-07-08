@@ -80,8 +80,7 @@ public class ObservableValueSource {
     public static <T> Observable<Change<T>> fromObservableValueChanges(final ObservableValue<T> fxObservable) {
         return Observable.create((ObservableEmitter<Change<T>> emitter) -> {
             final ChangeListener<T> listener = (observableValue, prev, current) -> {
-                if (current != null)
-                    emitter.onNext(new Change<>(prev,current));
+                emitter.onNext(new Change<>(prev,current));
             };
 
             fxObservable.addListener(listener);
